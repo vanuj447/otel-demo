@@ -1,0 +1,83 @@
+{
+  "title": "Otel Demo: Logs, Metrics & Traces",
+  "uid": null,
+  "timezone": "browser",
+  "schemaVersion": 37,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Requests per Second",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(requests_total[1m])",
+          "legendFormat": "{{route}}",
+          "refId": "A"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 6 }
+    },
+    {
+      "type": "stat",
+      "title": "CPU Usage %",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "cpu_usage_percent",
+          "refId": "B"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 6, "h": 3 }
+    },
+    {
+      "type": "stat",
+      "title": "Memory Usage (MB)",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "memory_usage_bytes / 1024 / 1024",
+          "refId": "C"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 3, "w": 6, "h": 3 }
+    },
+    {
+      "type": "table",
+      "title": "Recent Logs (Loki)",
+      "datasource": "Loki",
+      "targets": [
+        {
+          "expr": "{job=\"docker\"} |~ \"app\"",
+          "refId": "D"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 6, "w": 18, "h": 6 }
+    },
+    {
+      "type": "table",
+      "title": "Error Logs (Loki)",
+      "datasource": "Loki",
+      "targets": [
+        {
+          "expr": "{job=\"docker\"} |= \"Error\"",
+          "refId": "E"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 12, "w": 9, "h": 6 }
+    },
+    {
+      "type": "trace",
+      "title": "Recent Traces (Tempo)",
+      "datasource": "Tempo",
+      "targets": [
+        {
+          "query": "{}",
+          "refId": "F"
+        }
+      ],
+      "gridPos": { "x": 9, "y": 12, "w": 9, "h": 6 }
+    }
+  ]
+}
