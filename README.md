@@ -18,7 +18,7 @@ This repository contains a fully working observability demo stack using Docker C
 
 ```bash
 git clone https://github.com/vanuj447/otel-demo.git
-cd repo
+cd otel-demo
 ```
 
 ### 2. Build and Start the Stack
